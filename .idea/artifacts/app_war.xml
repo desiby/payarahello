@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="app:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/app_war</output-path>
+    <root id="root">
+      <element id="directory" name="app.war">
+        <element id="artifact" artifact-name="app:war exploded" />
+      </element>
+    </root>
+  </artifact>
+</component>
