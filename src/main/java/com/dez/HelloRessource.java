@@ -1,12 +1,16 @@
+/**
+ * Created by Desire Bah Bioh
+ * copyright 2017
+ *
+ * RESTful API running on payara micro
+ *
+ * */
 package com.dez;
-
-
 
 import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,8 +21,11 @@ public class HelloRessource {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.
             createEntityManagerFactory("dezdb");
 
-    //Add a message ***************************************************************
-
+    /**
+     * Add a message
+     *@param message string to add to the url as the message
+     *@return Response
+     * */
     @Path("/add")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,8 +64,10 @@ public class HelloRessource {
         return Response.ok().build();
     }
 
-    //Display List of all messages ************************************************
-
+    /**
+     * Display all messages
+     *@return Response
+     * */
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,8 +101,11 @@ public class HelloRessource {
         return Response.ok(messages).build();
     }
 
-    //find a message by ID
-
+    /**
+     * Add a message
+     *@param id passing message id to the url
+     *@return Response
+     * */
     @GET
     @Path("/message")
     public Response getMessage(@QueryParam("id") int id){
@@ -125,9 +137,10 @@ public class HelloRessource {
         return  Response.ok(message).build();
     }
 
-
-    //Delete a message by ID ******************************************************
-
+    /**
+     * Delete a message
+     *@param id passing the message id to the url
+     * */
     @DELETE
     @Path("/delete")
     @Produces(MediaType.APPLICATION_JSON)
@@ -167,8 +180,11 @@ public class HelloRessource {
         }
     }
 
-    //Update a message ***************************************************
-
+    /**
+     * Update a message
+     *@param id passing the message id to the url
+     *@param message passing the modified message to the url
+     * */
     @PUT
     @Path("/update")
     @Produces(MediaType.APPLICATION_JSON)
