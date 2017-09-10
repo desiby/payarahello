@@ -2,13 +2,11 @@ package com.dez;
 
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,7 +62,7 @@ public class HelloRessource {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response DisplayGreeting() {
+    public Response DisplayMessage() {
         List<Message> messages = null;
 
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -93,6 +91,40 @@ public class HelloRessource {
         }
         return Response.ok(messages).build();
     }
+
+    //find a message by ID
+
+    @GET
+    @Path("/message")
+    public Response getMessage(@QueryParam("id") int id){
+         Message message = new Message();
+        //create entity manager
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //create entity transaction
+        EntityTransaction transaction = null;
+
+        try {
+            // Get a transaction
+            transaction = entityManager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+            Query query = entityManager.createQuery("select m from Message m where m.id = :id").setParameter("id",id);
+            message = (Message)query.getSingleResult();
+        }catch (NoResultException ex) {
+            // If there are any exceptions, roll back the changes
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            // Print the Exception
+            ex.printStackTrace();
+        } finally {
+            // Close the EntityManager
+            entityManager.close();
+        }
+
+        return  Response.ok(message).build();
+    }
+
 
     //Delete a message by ID ******************************************************
 
