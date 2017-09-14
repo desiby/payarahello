@@ -1,10 +1,8 @@
-/**
+/*
  * Created by Desire Bah Bioh
  * copyright 2017
- *
  * RESTful API running on payara micro
- *
- * */
+ */
 package com.dez;
 
 import javax.persistence.*;
@@ -102,7 +100,7 @@ public class HelloRessource {
     }
 
     /**
-     * Add a message
+     * Find a message by id
      *@param id passing message id to the url
      *@return Response
      * */
@@ -161,7 +159,7 @@ public class HelloRessource {
             if(msg == null){
               System.out.println("NOT FOUND!");
             }else {
-                // Delete the student
+                // Delete the message
                 entityManager.remove(msg);
                 // Commit the transaction
                 transaction.commit();
