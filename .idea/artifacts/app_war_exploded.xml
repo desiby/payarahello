@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="app:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/app_war_exploded</output-path>
-    <root id="root">
-      <element id="module-output" name="payarahello" />
-      <element id="artifact" artifact-name="app:war exploded" />
-    </root>
-  </artifact>
-</component>
